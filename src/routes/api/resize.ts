@@ -4,16 +4,22 @@ import sharp from 'sharp'
 
 const resize = express.Router();
 
-console.log(__dirname);
 const img = path.join(__dirname, 'panda.jpeg');
 
-resize.get('/resize',async (_req, res) => {
+resize.get('/resize',async (req: express.Request, res: express.Response) => {
+    if(Object.keys(req.query).length !== 0){
+    const height:number = parseInt(req.query.height as string)
+    const width:number = parseInt(req.query.width as string)
     res.send('I am here');
 try{
-    await sharp(img).resize(200,300).toFile('output.jpeg');
+    await sharp(img).resize(height,width).toFile('output.jpeg');
 }catch(err) {
     console.log(err);
 }
+    }
+    else{
+    res.send('Bad request please enter the correct parameters');
+    }
 });
 
 
