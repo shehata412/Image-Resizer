@@ -1,11 +1,11 @@
 import express from 'express';
-import routes from './routes/index'
-import resize from './routes/api/resize'
+import routes from './routes/index';
+import images from './routes/api/images';
 const app = express();
 
 app.use(routes);
-app.use('/api',resize)
+app.use('/api', images);
 const PORT = 3000;
-app.listen(PORT, ()=>{
-    console.log(`listening on ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`listening on ${PORT}`);
 });
