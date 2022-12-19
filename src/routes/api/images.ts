@@ -8,9 +8,9 @@ const new_img_path: string = path.join(__dirname, '../../../assets/thumb/');
 
 images.get('/images', async (req: express.Request, res: express.Response) => {
   if (Object.keys(req.query).length == 0) {
-    res.send('Bad request please enter the correct parameters');
+    res.status(400).send('Bad request please enter the correct parameters');
   } else if (!req.query.filename) res.status(400).send('Please send the filename');
-  else if (!req.query.height) res.status(400).send('Please send the Height');
+  else if (!req.query.height) res.status(400).send('Please send the height');
   else if (!req.query.width) res.status(400).send('Please send the width');
   else {
     const img: string = img_path + `${req.query.filename as string}.jpeg`;
